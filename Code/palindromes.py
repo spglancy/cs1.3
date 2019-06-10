@@ -2,9 +2,10 @@
 
 import string
 # Hint: Use these string constants to ignore capitalization and/or punctuation
-# string.ascii_lowercase is 'abcdefghijklmnopqrstuvwxyz'
+# chars is 'abcdefghijklmnopqrstuvwxyz'
 # string.ascii_uppercase is 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-# string.ascii_letters is ascii_lowercase + ascii_uppercase
+# chars is ascii_lowercase + ascii_uppercase
+chars = list(string.ascii_lowercase)
 
 
 def is_palindrome(text):
@@ -19,17 +20,55 @@ def is_palindrome(text):
 
 def is_palindrome_iterative(text):
     # TODO: implement the is_palindrome function iteratively here
-    pass
     # once implemented, change is_palindrome to call is_palindrome_iterative
     # to verify that your iterative implementation passes all tests
-
+    if len(text) < 1:
+        return True
+    left = 0
+    right = len(text)-1
+    passing = True
+    text = text.lower()
+    while passing:
+        while text[left] not in chars:
+            left += 1
+            if left >= right:
+                return True
+        while text[right] not in chars:
+            right -= 1
+            if right <= left:
+                return True
+        if left >= right:
+            return True
+        if text[left] != text[right]:
+            return False
+        left += 1
+        right -= 1
 
 def is_palindrome_recursive(text, left=None, right=None):
     # TODO: implement the is_palindrome function recursively here
-    pass
     # once implemented, change is_palindrome to call is_palindrome_recursive
     # to verify that your iterative implementation passes all tests
-
+    if len(text) < 1:
+        return True
+    if left == None:
+        left = 0
+        right = len(text)-1
+    text = text.lower()    
+    while text[left] not in chars:
+        left += 1
+        if left >= right:
+            return True
+    while text[right] not in chars:
+        right -= 1
+        if right <= left:
+            return True
+    if left >= right:
+        return True
+    if text[left] != text[right]:
+        return False
+    left += 1
+    right -= 1
+    return(is_palindrome_recursive(text, left, right))
 
 def main():
     import sys

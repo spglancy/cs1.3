@@ -23,7 +23,14 @@ def decode(digits, base):
     # ...
     # TODO: Decode digits from any base (2 up to 36)
     # ...
-
+    chars = list(string.ascii_lowercase)
+    digits = digits.lower()
+    nums = list(digits)
+    output = 0
+    for index, digit in enumerate(reversed(nums)):
+        if digit in chars:
+            digit = chars.index(digit) + 10
+        output += (base**index)*digit
 
 def encode(number, base):
     """Encode given number in base 10 to digits in given base.
