@@ -5,7 +5,7 @@ import string
 # chars is 'abcdefghijklmnopqrstuvwxyz'
 # string.ascii_uppercase is 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 # chars is ascii_lowercase + ascii_uppercase
-chars = list(string.ascii_lowercase)
+chars = list(string.ascii_letters)
 
 
 def is_palindrome(text):
@@ -53,7 +53,6 @@ def is_palindrome_recursive(text, left=None, right=None):
     if left == None:
         left = 0
         right = len(text)-1
-    text = text.lower()    
     while text[left] not in chars:
         left += 1
         if left >= right:
@@ -64,7 +63,7 @@ def is_palindrome_recursive(text, left=None, right=None):
             return True
     if left >= right:
         return True
-    if text[left] != text[right]:
+    if text[left].lower() != text[right].lower():
         return False
     left += 1
     right -= 1

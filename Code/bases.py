@@ -30,7 +30,8 @@ def decode(digits, base):
     for index, digit in enumerate(reversed(nums)):
         if digit in chars:
             digit = chars.index(digit) + 10
-        output += (base**index)*digit
+        output += (base**index)*int(digit)
+    return output
 
 def encode(number, base):
     """Encode given number in base 10 to digits in given base.
@@ -47,6 +48,23 @@ def encode(number, base):
     # ...
     # TODO: Encode number in any base (2 up to 36)
     # ...
+    output = []
+    placeval = 1
+    places = 1
+    while(placeval*base <= number):
+        placeval *= base
+        places += 1
+    for i in range(places):
+        num = (number-(number%placeval))//placeval
+        if(num < 10):
+            num = chr(num + 48)
+        else:
+            num = chr(num + 87)
+        output.append(num)
+        number = (number%placeval)
+        placeval //= base
+    
+    return("".join(output))
 
 
 def convert(digits, base1, base2):
@@ -66,6 +84,8 @@ def convert(digits, base1, base2):
     # ...
     # TODO: Convert digits from any base to any base (2 up to 36)
     # ...
+    decimal = decode(digits, base1)
+    return encode(decimal, base2)
 
 
 def main():
