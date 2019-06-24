@@ -63,6 +63,7 @@ class BinarySearchTree(object):
         TODO: Best and worst case running time: ??? under what conditions?"""
         if self.root:
             return self.root.height()
+        return 0
 
     def contains(self, item):
         """Return True if this binary search tree contains the given item.
@@ -77,7 +78,9 @@ class BinarySearchTree(object):
         TODO: Best case running time: ??? under what conditions?
         TODO: Worst case running time: ??? under what conditions?"""
         node = self._find_node_recursive(item, self.root)
-        return node.data if node is not None else None
+        if node is not None:
+            return node.data
+        return None
 
     def insert(self, item):
         """Insert the given item in order into this binary search tree.
@@ -114,9 +117,9 @@ class BinarySearchTree(object):
             if node.data == item:
                 return node
             elif item < node.data:
-                node = item.left()
+                node = item.left
             elif item > node.data:
-                node = item.right()
+                node = item.right
         return None
 
     def _find_node_recursive(self, item, node):
