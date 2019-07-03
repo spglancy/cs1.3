@@ -1,50 +1,55 @@
 from hashtable import HashTable
 class Set(object):
-  def __init__(self):
+  def __init__(self, elems=[]):
     self.size = 0
     self.table = HashTable()
-  
-  def contains(item):
-    self.table.get(item)
+    for i in elems:
+      self.table.set(i, i)
 
-  def add(item):
+  def __str__(self):
+    return str(self.table.keys())
+  
+  def contains(self, item):
+    return self.table.contains(item)
+
+  def add(self, item):
+    if self.contains(item):
+      raise ValueError("item already in set")
+    self.size += 1
     self.table.set(item, item)
 
-  def remove(item):
+  def remove(self, item):
+    if not self.contains(item):
+      raise ValueError("item not in set")
+    self.size -= 1
     self.table.delete(item)
 
-  def union(set2):
+  def union(self, set2):
     new = Set()
-    for i in self.table.items():
-      new.add(i[0])
-    for val in set2.table.items():
-      if not new.contains(val[0]):
-        new.add(val[0])
+    for i in self.table.keys():
+      new.add(i)
+    for val in set2.table.keys():
+      if not new.contains(val):
+        new.add(val)
     return new
 
-  def difference():
+  def difference(self, set2):
     new = Set()
-    for i in self.table.items():
-      if not set2.contains(i[0]):
-        new.add(i[0])
+    for i in self.table.keys():
+      if not set2.contains(i):
+        new.add(i)
     return new
 
-  def intersection():
+  def intersection(self, set2):
     new = Set()
-    for i in self.table.items():
-      if set2.contains(val[0]):
-        new.add(val[0])
+    for val in self.table.keys():
+      if set2.contains(val):
+        new.add(val)
     return new
 
-  def is_subset():
-    if self.size > set2.size:
-      group1 = self
-      group2 = set2.table.items()
-    else:
-      group2 = self.table.items()
-      group1 = set2
-    for val in group2:
-      if not group1.contains(val[0]):
+  def is_subset(self, set2):
+    for val in set2.table.keys():
+      if not self.contains(val):
         return False
     return True
       
