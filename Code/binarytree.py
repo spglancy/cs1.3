@@ -117,9 +117,9 @@ class BinarySearchTree(object):
             if node.data == item:
                 return node
             elif item < node.data:
-                node = item.left
+                node = node.left
             elif item > node.data:
-                node = item.right
+                node = node.right
         return None
 
     def _find_node_recursive(self, item, node):
